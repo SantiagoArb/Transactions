@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping(value = "/api/v1/movements", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,5 +41,12 @@ public class ApiRestMovements {
             return ResponseEntity.ok(SuccessResponse.error(ex.getMessage(),ex.getCode()));
         }
 
+    }
+
+    @GetMapping("/reports")
+    public ResponseEntity<Object> movementReport(@RequestParam String idClient,@RequestParam String initialDate, @RequestParam String finalDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        return ResponseEntity.ok(SuccessResponse.success("Movement", movementUseCase.movementReport(idClient,LocalDateTime.parse(initialDate,formatter) , LocalDateTime.parse(finalDate,formatter)),SUCCESS_MESSAGE));
     }
 }

@@ -3,14 +3,15 @@ package co.com.arbelaez.jpa.movement;
 import co.com.arbelaez.jpa.helper.AdapterOperations;
 import co.com.arbelaez.model.Exception.ErrorException;
 import co.com.arbelaez.model.movements.Movement;
+import co.com.arbelaez.model.movements.ReportData;
 import co.com.arbelaez.model.movements.gateways.MovementsRepository;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.function.Function;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public class MovementDataAdapter extends AdapterOperations<Movement, MovementData, String, MovementDataRepository> implements MovementsRepository {
@@ -44,5 +45,10 @@ public class MovementDataAdapter extends AdapterOperations<Movement, MovementDat
     @Override
     public BigDecimal currentBalance(String idAccount){
         return repository.currentBalance(idAccount);
+    }
+
+    @Override
+    public List<ReportData> movementsReport(String idClient, LocalDateTime initialDate, LocalDateTime finalDate) {
+        return repository.movementsReport(idClient, initialDate, finalDate);
     }
 }

@@ -4,7 +4,6 @@ import co.com.arbelaez.model.Exception.ErrorException;
 import co.com.arbelaez.model.customer.Customer;
 import co.com.arbelaez.usecase.customer.CustomerUseCase;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,6 @@ public class ApiRestCustomers {
 
     @GetMapping(path = "/path")
     public String commandName() {
-//      return useCase.doAction();
         return "Hello World";
     }
 

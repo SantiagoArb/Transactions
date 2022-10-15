@@ -3,12 +3,14 @@ package co.com.arbelaez.usecase.movementsments;
 import co.com.arbelaez.model.Exception.ErrorException;
 import co.com.arbelaez.model.movements.Movement;
 import co.com.arbelaez.model.movements.MovementType;
+import co.com.arbelaez.model.movements.ReportData;
 import co.com.arbelaez.model.movements.gateways.MovementsRepository;
 import co.com.arbelaez.usecase.account.AccountUseCase;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -47,10 +49,10 @@ public class MovementUseCase {
     }
 
     public BigDecimal calculateBalance(MovementType movementType, BigDecimal currentBalance, BigDecimal value){
-        if (movementType.equals(MovementType.INGRESO)){
-            return currentBalance.add(value);
-        }else {
-            return currentBalance.subtract(value);
-        }
+        return currentBalance.add(value);
+    }
+
+    public List<ReportData> movementReport(String idClient, LocalDateTime initialDate, LocalDateTime finalDate){
+        return movementsRepository.movementsReport(idClient, initialDate, finalDate);
     }
 }
