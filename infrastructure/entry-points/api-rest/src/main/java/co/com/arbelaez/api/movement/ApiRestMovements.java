@@ -46,7 +46,11 @@ public class ApiRestMovements {
     @GetMapping("/reports")
     public ResponseEntity<Object> movementReport(@RequestParam String idClient,@RequestParam String initialDate, @RequestParam String finalDate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+try{
+    return ResponseEntity.ok(SuccessResponse.success("Movement", movementUseCase.movementReport(idClient,LocalDateTime.parse(initialDate,formatter) , LocalDateTime.parse(finalDate,formatter)),SUCCESS_MESSAGE));
+}catch (Exception ex){
+    return ResponseEntity.ok(SuccessResponse.error("No hay movimientos registrados",404));
+}
 
-        return ResponseEntity.ok(SuccessResponse.success("Movement", movementUseCase.movementReport(idClient,LocalDateTime.parse(initialDate,formatter) , LocalDateTime.parse(finalDate,formatter)),SUCCESS_MESSAGE));
     }
 }

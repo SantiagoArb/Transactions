@@ -12,9 +12,9 @@ spring:
   profiles:
     include: null
   datasource:
-    url: "jdbc:mysql://us-cdbr-east-06.cleardb.net/heroku_89b32b46b59096d"
-    username: "bb8d2dd6734b5c"
-    password: "e246d8a3"
+    url: "jdbc:mysql://us-cdbr-east-06.cleardb.net/heroku_6e2cc335f6e3b5c"
+    username: "b993b73158ce97"
+    password: "102c0bf5"
     driverClassName: "com.mysql.cj.jdbc.Driver"
   jpa:
     databasePlatform: "org.hibernate.dialect.H2Dialect"
