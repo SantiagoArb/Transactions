@@ -26,9 +26,10 @@ CREATE TABLE account(
 CREATE TABLE movements(
 	id_movement VARCHAR(36) PRIMARY KEY,
     type_movement VARCHAR(8) NOT NULL,
-    date TIMESTAMP not null,
-    value DECIMAL NOT NULL,
+    date_mov TIMESTAMP not null,
+    value_mov DECIMAL NOT NULL,
     balance DECIMAL NOT NULL,
     id_account VARCHAR(36),
     FOREIGN KEY (id_account) REFERENCES account(account_number)
     );
+

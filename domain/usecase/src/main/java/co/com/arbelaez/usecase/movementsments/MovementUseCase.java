@@ -20,6 +20,12 @@ public class MovementUseCase {
     private final AccountUseCase accountUseCase;
 
     public Movement saveMovement(Movement movement) throws ErrorException {
+
+        if (movement.getMovementType().equals(MovementType.INGRESO) && movement.getValue().compareTo(BigDecimal.ZERO) < 0 ||
+                movement.getMovementType().equals(MovementType.RETIRO) && movement.getValue().compareTo(BigDecimal.ZERO) > 0){
+                throw new ErrorException("Tipo de ingreso invalido para el valor solicitado", 500);
+        }
+
         movement.setDate(LocalDateTime.now());
         BigDecimal lastBalance = currentBalance(movement.getIdAccount());
         BigDecimal newBalance;
