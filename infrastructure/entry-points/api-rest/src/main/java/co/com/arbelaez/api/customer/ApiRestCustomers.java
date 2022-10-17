@@ -33,6 +33,16 @@ public class ApiRestCustomers {
 
     }
 
+    @PutMapping()
+    public ResponseEntity<Object> updateCustomer(@RequestBody Customer customer){
+        try{
+            return ResponseEntity.ok(SuccessResponse.success("Customer", useCase.updateCustomer(customer),SUCCESS_MESSAGE));
+        }catch (Exception ex){
+            return ResponseEntity.ok(SuccessResponse.error(ex.getMessage() != null? ex.getMessage(): ex.getCause().getMessage(),500));
+        }
+
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteCustomer(@PathVariable String id) throws ErrorException {
         try

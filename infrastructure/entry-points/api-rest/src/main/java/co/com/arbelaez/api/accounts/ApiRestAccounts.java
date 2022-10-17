@@ -3,8 +3,6 @@ package co.com.arbelaez.api.accounts;
 import co.com.arbelaez.api.utils.SuccessResponse;
 import co.com.arbelaez.model.Exception.ErrorException;
 import co.com.arbelaez.model.account.Account;
-import co.com.arbelaez.model.account.AccountType;
-import co.com.arbelaez.model.customer.Customer;
 import co.com.arbelaez.usecase.account.AccountUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -24,7 +22,17 @@ public class ApiRestAccounts {
     @PostMapping()
     public ResponseEntity<Object> saveAccount(@RequestBody Account account){
         try{
-            return ResponseEntity.ok(SuccessResponse.success("Account", accountUseCase.saveAccount(account),SUCCESS_MESSAGE));
+            return ResponseEntity.ok(SuccessResponse.success("Account", accountUseCase.createAccount(account),SUCCESS_MESSAGE));
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return ResponseEntity.ok(SuccessResponse.error(ex.getMessage() != null? ex.getMessage(): ex.getCause().getMessage(),500));
+        }
+    }
+
+    @PutMapping()
+    public ResponseEntity<Object> updateAccount(@RequestBody Account account){
+        try{
+            return ResponseEntity.ok(SuccessResponse.success("Account", accountUseCase.updateAccount(account),SUCCESS_MESSAGE));
         }catch (Exception ex){
             ex.printStackTrace();
             return ResponseEntity.ok(SuccessResponse.error(ex.getMessage() != null? ex.getMessage(): ex.getCause().getMessage(),500));

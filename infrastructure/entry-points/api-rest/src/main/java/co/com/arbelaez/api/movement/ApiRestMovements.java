@@ -24,33 +24,32 @@ public class ApiRestMovements {
 
 
     @PostMapping()
-    public ResponseEntity<Object> saveMovement(@RequestBody Movement movement){
-        try{
-            return ResponseEntity.ok(SuccessResponse.success("Movement", movementUseCase.saveMovement(movement),SUCCESS_MESSAGE));
-        }catch (ErrorException ex){
-            return ResponseEntity.ok(SuccessResponse.error(ex.getMessage() != null? ex.getMessage(): ex.getCause().getMessage(),ex.getCode()));
+    public ResponseEntity<Object> saveMovement(@RequestBody Movement movement) {
+        try {
+            return ResponseEntity.ok(SuccessResponse.success("Movement", movementUseCase.saveMovement(movement), SUCCESS_MESSAGE));
+        } catch (ErrorException ex) {
+            return ResponseEntity.ok(SuccessResponse.error(ex.getMessage() != null ? ex.getMessage() : ex.getCause().getMessage(), ex.getCode()));
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteMovement(@PathVariable String id) throws ErrorException {
-        try
-        {
-            return ResponseEntity.ok(SuccessResponse.success("Delete", movementUseCase.deleteMovement(id),SUCCESS_MESSAGE));
-        }catch (ErrorException ex){
-            return ResponseEntity.ok(SuccessResponse.error(ex.getMessage(),ex.getCode()));
+        try {
+            return ResponseEntity.ok(SuccessResponse.success("Delete", movementUseCase.deleteMovement(id), SUCCESS_MESSAGE));
+        } catch (ErrorException ex) {
+            return ResponseEntity.ok(SuccessResponse.error(ex.getMessage(), ex.getCode()));
         }
 
     }
 
     @GetMapping("/reports")
-    public ResponseEntity<Object> movementReport(@RequestParam String idClient,@RequestParam String initialDate, @RequestParam String finalDate){
+    public ResponseEntity<Object> movementReport(@RequestParam String idClient, @RequestParam String initialDate, @RequestParam String finalDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-try{
-    return ResponseEntity.ok(SuccessResponse.success("Movement", movementUseCase.movementReport(idClient,LocalDateTime.parse(initialDate,formatter) , LocalDateTime.parse(finalDate,formatter)),SUCCESS_MESSAGE));
-}catch (Exception ex){
-    return ResponseEntity.ok(SuccessResponse.error("No hay movimientos registrados",404));
-}
+        try {
+            return ResponseEntity.ok(SuccessResponse.success("Movement", movementUseCase.movementReport(idClient, LocalDateTime.parse(initialDate, formatter), LocalDateTime.parse(finalDate, formatter)), SUCCESS_MESSAGE));
+        } catch (Exception ex) {
+            return ResponseEntity.ok(SuccessResponse.error("No hay movimientos registrados", 404));
+        }
 
     }
 }

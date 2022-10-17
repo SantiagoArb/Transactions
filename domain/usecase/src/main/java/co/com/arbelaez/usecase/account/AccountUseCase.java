@@ -12,11 +12,27 @@ public class AccountUseCase {
 
     private final AccountRepository accountRepository;
 
-    public Account saveAccount(Account account){
-        if (account.getAccountNumber() == null){
-            account.setAccountNumber(UUID.randomUUID().toString());
+    public Account createAccount(Account account) throws ErrorException {
+        if (account.getAccountNumber() != null && findAccountById(account.getAccountNumber()) != null){
+            throw new ErrorException("El numero de cuenta ya existe",500);
         }
+        account.setAccountNumber(UUID.randomUUID().toString());
         return accountRepository.saveAccount(account);
+    }
+
+    public Account updateAccount(Account account) throws ErrorException {
+        if (account.getAccountNumber() != null){
+            if(findAccountById(account.getAccountNumber()) != null){
+                return accountRepository.saveAccount(account);
+
+            }else{
+                throw new ErrorException("La cuenta no existe",500);
+            }
+
+        }else{
+            throw new ErrorException("Numero de cuenta no valido",500);
+        }
+
     }
 
     public Account deleteAccount(String accountNumber) throws ErrorException {
