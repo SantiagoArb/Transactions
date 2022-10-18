@@ -19,7 +19,7 @@ jar {
     // To disable the *-plain.jar
     enabled = false
 }
-project.buildDir = "${project.getParent().getProjectDir()}/build/libs/"
+project.buildDir = "${project.getParent().getProjectDir()}"
 bootJar {
     // Sets output jar name
     archiveFileName = "${project.getParent().getName()}.${archiveExtension.get()}"
