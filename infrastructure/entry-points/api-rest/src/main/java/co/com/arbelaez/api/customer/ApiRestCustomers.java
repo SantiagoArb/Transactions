@@ -18,9 +18,9 @@ public class ApiRestCustomers {
     private final CustomerUseCase useCase;
 
 
-    @GetMapping(path = "/path")
-    public String commandName() {
-        return "Hello World";
+    @GetMapping(path = "/health")
+    public String health() {
+        return "Application is UP!!!";
     }
 
     @PostMapping()
